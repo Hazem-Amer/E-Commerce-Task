@@ -19,20 +19,53 @@ public class EcommerceStore {
     private CartService cartService;
 
     private EcommerceStore() {
-        Product cheese = new Product("Cheese", 100f, 5d, LocalDate.now(),true );
-        Product milk = new Product("Cheese", 100f, 5d,LocalDate.now().plusDays(2),true );
-        Product tv = new ShippableProducts("TV", 200f, 3d,2d);
-
         Customer customer = new Customer("Hazem", 10000f);
         cartService = new CartServiceImpl();
         Cart cart = new Cart(cartService);
-        cart.addToCart(cheese, 2d);
-        cart.addToCart(milk, 3.5d);
-        cart.addToCart(tv, 1d);
-
         ShippingService shippingService = new ShippingServiceImpl();
         CheckOutService checkoutService = new Checkout(cartService,shippingService);
+
+
+        /*Works normal Use Case*/
+        Product cheese = new Product("Cheese", 100f, 5d, LocalDate.now(),true );
+        Product tv = new ShippableProducts("TV", 200f, 3d,2d);
+
+        cart.addToCart(cheese, 2d);
+        cart.addToCart(tv, 1d);
         checkoutService.checkout(customer,cart);
+
+        /*Throws product expired exception*/
+//        Product expiredMilk = new Product("Milk", 50f, 2d, LocalDate.now().minusDays(1), true);
+//        Customer sami = new Customer("Sami", 500f);
+//
+//        cart.addToCart(expiredMilk, 1d);
+//        checkoutService.checkout(sami, cart);
+
+
+
+
+       /*Throws product outofstock exception*/
+//        Product biscuits = new Product("Biscuits", 80f, 1d, LocalDate.now().plusDays(3), true);
+//        Customer alaa = new Customer("Alaa", 400f);
+//
+//        cart.addToCart(biscuits, 3d);
+//        checkoutService.checkout(alaa, cart);
+
+
+        /*insufficient Balance exception*/
+//        Product laptop = new ShippableProducts("Laptop", 900f, 2d, 2d);
+//        Customer omar = new Customer("Omar", 500f); // not enough for Laptop
+//
+//        cart.addToCart(laptop, 1d);
+//        checkoutService.checkout(omar, cart);
+
+
+        /*Empty Cart exception*/
+//        Customer nour = new Customer("Nour", 500f);
+//        checkoutService.checkout(nour, cart);
+
+
+
     }
 
     public static EcommerceStore getEcommerceStore() {
