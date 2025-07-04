@@ -12,9 +12,9 @@ public class ShippingMapper {
 
         for (CartItem item : items) {
             if (item.getProduct() instanceof Shippable shippableProduct) {
-                Double quantity = item.getQuantity();
-                Double unitWeight = shippableProduct.getWeight();
-                Double totalWeight = quantity * unitWeight;
+                Float quantity = item.getQuantity();
+                Float unitWeight = shippableProduct.getWeight();
+                Float totalWeight = quantity * unitWeight;
 
                 result.add(new Shippable() {
                     @Override
@@ -23,7 +23,7 @@ public class ShippingMapper {
                     }
 
                     @Override
-                    public Double getWeight() {
+                    public Float getWeight() {
                         return totalWeight;
                     }
                 });

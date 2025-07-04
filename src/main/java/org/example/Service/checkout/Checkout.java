@@ -12,7 +12,6 @@ import org.example.utils.PriceCalculator;
 import org.example.Service.shipment.Shippable;
 import org.example.utils.ShippingMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Checkout implements CheckOutService {
@@ -32,6 +31,7 @@ public class Checkout implements CheckOutService {
         this.shippingMapper = new ShippingMapper();
     }
 
+
     @Override
     public void checkout(Customer customer, Cart cart) {
         if (cartService.isEmpty()) throw new IllegalStateException("Cart is empty.");
@@ -43,7 +43,7 @@ public class Checkout implements CheckOutService {
             item.getProduct().reduceQuantity(item.getQuantity());
         }
         if (!toShip.isEmpty()) {
-            receiptPrinter.printShipmentNotice(toShip);
+            shippingService.startShipping(toShip);
         }
         Float subtotal = priceCalculator.calculateSubtotal(items);
         Float shipping = priceCalculator.calculateShipping(toShip);

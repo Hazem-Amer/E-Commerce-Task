@@ -4,9 +4,9 @@ import org.example.model.product.Product;
 
 public class CartItem {
     private Product product;
-    private Double quantity;
+    private Float quantity;
 
-    public CartItem(Product product, Double quantity) {
+    public CartItem(Product product, Float quantity) {
         this.product = product;
         this.quantity = quantity;
     }
@@ -19,7 +19,7 @@ public class CartItem {
         this.product = product;
     }
 
-    public void setQuantity(Double quantity) {
+    public void setQuantity(Float quantity) {
         this.quantity = quantity;
     }
 
@@ -27,7 +27,7 @@ public class CartItem {
         return product.getPrice() * quantity.floatValue();
     }
 
-    public Double getQuantity() {
+    public Float getQuantity() {
         return quantity;
     }
 }

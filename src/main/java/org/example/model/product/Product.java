@@ -8,18 +8,18 @@ import java.time.LocalDate;
 public class Product extends BaseEntity {
     private final String name;
     private Float price;
-    private Double quantity;
+    private Float quantity;
     private LocalDate expiryDate;
     private Boolean isExpirable = false;
 
-    public Product(String name, Float price, Double quantity) {
+    public Product(String name, Float price, Float quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.isExpirable = false;
     }
 
-    public Product(String name, Float price, Double quantity, LocalDate expiryDate, Boolean isExpirable) {
+    public Product(String name, Float price, Float quantity, LocalDate expiryDate, Boolean isExpirable) {
         this(name, price, quantity);
         this.expiryDate = expiryDate;
         this.isExpirable = isExpirable;
@@ -33,7 +33,7 @@ public class Product extends BaseEntity {
         return price;
     }
 
-    public Double getQuantity() {
+    public Float getQuantity() {
         return quantity;
     }
 
@@ -45,7 +45,7 @@ public class Product extends BaseEntity {
         return isExpirable;
     }
 
-    public void reduceQuantity(Double amount) {
+    public void reduceQuantity(Float amount) {
         if (amount > quantity) throw new IllegalArgumentException("Not enough stock.");
         this.quantity -= amount;
     }

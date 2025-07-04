@@ -3,11 +3,19 @@ package org.example.model.product;
 
 import org.example.Service.shipment.Shippable;
 
-public class ShippableProducts extends Product implements Shippable {
-    private Double weight;
+import java.time.LocalDate;
 
-    public ShippableProducts(String name, Float price, Double quantity, Double weight) {
+public class ShippableProducts extends Product implements Shippable {
+    private final Float weight;
+
+    public ShippableProducts(String name, Float price, Float quantity, Float weight) {
         super(name, price, quantity);
+        this.weight = weight;
+
+    }
+
+    public ShippableProducts(String name, Float price, Float quantity, LocalDate expiryDate, Boolean isExpirable, Float weight) {
+        super(name, price, quantity, expiryDate, isExpirable);
         this.weight = weight;
 
     }
@@ -18,7 +26,7 @@ public class ShippableProducts extends Product implements Shippable {
     }
 
     @Override
-    public Double getWeight() {
+    public Float getWeight() {
         return weight;
     }
 }

@@ -14,7 +14,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void addItem(Product product, Double quantity) {
+    public void addItem(Product product, Float quantity) {
         if (product.getQuantity() < quantity)
             throw new IllegalArgumentException("Requested quantity exceeds available stock.");
         for (CartItem cartItem : items) {

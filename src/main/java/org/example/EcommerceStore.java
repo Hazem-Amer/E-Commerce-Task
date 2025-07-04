@@ -16,22 +16,32 @@ import java.time.LocalDate;
 
 public class EcommerceStore {
     private static volatile EcommerceStore ecommerceStore = null;
-    private CartService cartService;
+
+    public static EcommerceStore getEcommerceStore() {
+        if (ecommerceStore == null) {
+            synchronized (EcommerceStore.class) {
+                if (ecommerceStore == null) {
+                    ecommerceStore = new EcommerceStore();
+                }
+            }
+        }
+        return ecommerceStore;
+    }
+
 
     private EcommerceStore() {
-        Customer customer = new Customer("Hazem", 10000f);
-        cartService = new CartServiceImpl();
-        Cart cart = new Cart(cartService);
+        CartService cartService = new CartServiceImpl();
         ShippingService shippingService = new ShippingServiceImpl();
         CheckOutService checkoutService = new Checkout(cartService,shippingService);
-
+        Cart cart = new Cart(cartService);
 
         /*Works normal Use Case*/
-        Product cheese = new Product("Cheese", 100f, 5d, LocalDate.now(),true );
-        Product tv = new ShippableProducts("TV", 200f, 3d,2d);
+        Customer customer = new Customer("Hazem", 10000f);
+        Product cheese = new ShippableProducts("Cheese", 100f, 5f, LocalDate.now(),true ,1f);
+        Product tv = new ShippableProducts("TV", 200f, 3f,5f);
 
-        cart.addToCart(cheese, 2d);
-        cart.addToCart(tv, 1d);
+        cart.addToCart(cheese, 2f);
+        cart.addToCart(tv, 1f);
         checkoutService.checkout(customer,cart);
 
         /*Throws product expired exception*/
@@ -68,14 +78,5 @@ public class EcommerceStore {
 
     }
 
-    public static EcommerceStore getEcommerceStore() {
-        if (ecommerceStore == null) {
-            synchronized (EcommerceStore.class) {
-                if (ecommerceStore == null) {
-                    ecommerceStore = new EcommerceStore();
-                }
-            }
-        }
-        return ecommerceStore;
-    }
+
 }

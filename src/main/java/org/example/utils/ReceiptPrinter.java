@@ -9,7 +9,7 @@ public class ReceiptPrinter {
     public void print(List<CartItem> items, Float subtotal, Float shipping, Float total, Float balance) {
         System.out.println("** Checkout receipt **");
         for (CartItem item : items)
-            System.out.printf("%fx %s\t%.0f%n", item.getQuantity(), item.getProduct().getName(), item.getSubPrice());
+            System.out.printf("%.2fx %s\t%.0f%n", item.getQuantity(), item.getProduct().getName(), item.getSubPrice());
         System.out.println("----------------------");
         System.out.printf("Subtotal\t\t%.0f%n", subtotal);
         System.out.printf("Shipping\t\t%.0f%n", shipping);

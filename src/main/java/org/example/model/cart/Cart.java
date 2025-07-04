@@ -19,7 +19,7 @@ public class Cart {
         return cartService.getItems();
     }
 
-    public void addToCart(Product product, Double quantity) {
+    public void addToCart(Product product, Float quantity) {
         cartService.addItem(product, quantity);
     }
 
