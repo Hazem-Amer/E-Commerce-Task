@@ -10,7 +10,6 @@ import org.example.model.Customer;
 import org.example.model.cart.Cart;
 import org.example.model.product.Product;
 import org.example.model.product.ShippableProducts;
-
 import java.time.LocalDate;
 
 
@@ -30,10 +29,10 @@ public class EcommerceStore {
 
 
     private EcommerceStore() {
-        CartService cartService = new CartServiceImpl();
         ShippingService shippingService = new ShippingServiceImpl();
+        CartService cartService = new CartServiceImpl();
         CheckOutService checkoutService = new Checkout(cartService,shippingService);
-        Cart cart = new Cart(cartService);
+        Cart cart = new Cart(cartService.getItems());
 
         /*Works normal Use Case, note: that shipment fees :30/kg */
         Customer customer = new Customer("Hazem", 10000f);

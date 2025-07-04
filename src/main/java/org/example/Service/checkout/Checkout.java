@@ -42,13 +42,13 @@ public class Checkout implements CheckOutService {
         for (CartItem item : items) {
             item.getProduct().reduceQuantity(item.getQuantity());
         }
-        if (!toShip.isEmpty()) {
-            shippingService.startShipping(toShip);
-        }
         Float subtotal = priceCalculator.calculateSubtotal(items);
         Float shipping = priceCalculator.calculateShipping(toShip);
         Float total = subtotal + shipping;
         customer.pay(total);
+        if (!toShip.isEmpty()) {
+            shippingService.startShipping(toShip);
+        }
         receiptPrinter.print(items, subtotal, shipping, total, customer.getBalance());
 
     }
